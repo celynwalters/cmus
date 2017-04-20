@@ -67,6 +67,8 @@ struct track_info {
 
 	int is_va_compilation : 1;
 	int bpm;
+
+	const char *encodedby;
 };
 
 typedef size_t sort_key_t;
