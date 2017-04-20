@@ -485,6 +485,9 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 		snprintf(buf, 6, "%u", tags->disk->index);
 		comments_add_const(&c, "discnumber", buf);
 	}
+	if (tags->encodedBy) {
+		comments_add_const(&c, "encodedby", tags->encodedBy);
+	}
 
 	MP4TagsFree(tags);
 
