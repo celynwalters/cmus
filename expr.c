@@ -451,6 +451,7 @@ static const struct {
 	{ "tag",	EXPR_BOOL	},
 	{ "title",	EXPR_STR	},
 	{ "tracknumber",EXPR_INT	},
+	{ "encodedby",	EXPR_STR	},
 	{ NULL,		-1		},
 };
 
@@ -900,6 +901,8 @@ static const char *str_val(const char *key, struct track_info *ti, char **need_f
 		val = ti->codec;
 	} else if (strcmp(key, "codec_profile") == 0) {
 		val = ti->codec_profile;
+	} else if (strcmp(key, "encodedby") == 0) {
+		val = ti->encodedby;
 	} else {
 		val = keyvals_get_val(ti->comments, key);
 	}
