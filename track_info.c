@@ -292,6 +292,7 @@ static const struct {
 	{ "codec_profile",	SORT_CODEC_PROFILE	},
 	{ "media",		SORT_MEDIA		},
 	{ "bpm",		SORT_BPM		},
+	{ "encodedby",		SORT_ENCODEDBY		},
 	{ "-artist",		REV_SORT_ARTIST		},
 	{ "-album",		REV_SORT_ALBUM		},
 	{ "-title",		REV_SORT_TITLE		},
@@ -314,6 +315,7 @@ static const struct {
 	{ "-codec_profile",	REV_SORT_CODEC_PROFILE	},
 	{ "-media",		REV_SORT_MEDIA		},
 	{ "-bpm",		REV_SORT_BPM		},
+	{ "-encodedby",		REV_SORT_ENCODEDBY		},
 	{ NULL,                 SORT_INVALID            }
 };
 
