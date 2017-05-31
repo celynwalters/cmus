@@ -416,6 +416,7 @@ static const struct {
 	{ 'a',	"artist"	},
 	{ 'c',	"comment"	},
 	{ 'd',	"duration"	},
+	{ 'e',	"encodedby"	},
 	{ 'f',	"filename"	},
 	{ 'g',	"genre"		},
 	{ 'l',	"album"		},
@@ -427,6 +428,7 @@ static const struct {
 	{ '\0',	NULL		},
 };
 
+// BE CAREFUL! Needs to be alphabetical
 static const struct {
 	const char *key;
 	enum expr_type type;
@@ -442,6 +444,7 @@ static const struct {
 	{ "date",	EXPR_INT	},
 	{ "discnumber", EXPR_INT	},
 	{ "duration",	EXPR_INT	},
+	{ "encodedby",	EXPR_STR	},
 	{ "filename",	EXPR_STR	},
 	{ "genre",	EXPR_STR	},
 	{ "media",	EXPR_STR	},
@@ -451,7 +454,6 @@ static const struct {
 	{ "tag",	EXPR_BOOL	},
 	{ "title",	EXPR_STR	},
 	{ "tracknumber",EXPR_INT	},
-	{ "encodedby",	EXPR_STR	},
 	{ NULL,		-1		},
 };
 

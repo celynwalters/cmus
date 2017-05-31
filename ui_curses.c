@@ -365,7 +365,7 @@ static struct format_option track_fopts[NR_TFS + 1] = {
 	DEF_FO_STR('\0', "shuffle", 0),
 	DEF_FO_STR('\0', "playlist_mode", 0),
 	DEF_FO_INT('\0', "bpm", 0),
-	DEF_FO_STR('\0', "encodedby", 0),
+	DEF_FO_STR('e', "encodedby", 0),
 	DEF_FO_END
 };
 
