@@ -227,12 +227,12 @@ static unsigned char cursed_to_fg_idx[NR_CURSED] = {
 
 static unsigned char cursed_to_attr_idx[NR_CURSED] = {
 	COLOR_WIN_ATTR,
-	COLOR_WIN_ATTR,
+	COLOR_WIN_CUR_ATTR,
 	COLOR_WIN_INACTIVE_SEL_ATTR,
 	COLOR_WIN_INACTIVE_CUR_SEL_ATTR,
 
 	COLOR_WIN_ATTR,
-	COLOR_WIN_ATTR,
+	COLOR_WIN_CUR_ATTR,
 	COLOR_WIN_SEL_ATTR,
 	COLOR_WIN_CUR_SEL_ATTR,
 
@@ -1818,8 +1818,8 @@ static void spawn_status_program(void)
 	argv[i++] = xstrdup(player_status_names[status]);
 	if (player_info.ti) {
 		static const char *keys[] = {
-			"artist", "album", "discnumber", "tracknumber", "title", "date",
-			"musicbrainz_trackid", NULL
+			"artist", "albumartist", "album", "discnumber", "tracknumber", "title",
+			"date",	"musicbrainz_trackid", NULL
 		};
 		int j;
 

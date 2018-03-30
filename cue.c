@@ -191,6 +191,7 @@ CUE_PARSE_STR(title)
 CUE_PARSE_STR(genre)
 CUE_PARSE_STR(date)
 CUE_PARSE_STR(comment)
+CUE_PARSE_STR(compilation);
 
 static void cue_parse_file(struct cue_parser *p)
 {
@@ -283,9 +284,10 @@ static void cue_parse_cmd(struct cue_parser *p, struct cue_switch *s)
 static void cue_parse_rem(struct cue_parser *p)
 {
 	struct cue_switch cmds[] = {
-		{ "DATE",    cue_parse_date    },
-		{ "GENRE",   cue_parse_genre   },
-		{ "COMMENT", cue_parse_comment },
+		{ "DATE",        cue_parse_date        },
+		{ "GENRE",       cue_parse_genre       },
+		{ "COMMENT",     cue_parse_comment     },
+		{ "COMPILATION", cue_parse_compilation },
 		{ 0 },
 	};
 
@@ -430,6 +432,7 @@ static void cue_meta_free(struct cue_meta *m)
 	free(m->genre);
 	free(m->date);
 	free(m->comment);
+	free(m->compilation);
 }
 
 static void cue_parser_free(struct cue_parser *p)
@@ -478,7 +481,15 @@ struct cue_sheet *cue_from_file(const char *file)
 	char *buf = mmap_file(file, &size);
 	if (size == -1)
 		return NULL;
-	struct cue_sheet *rv = cue_parse(buf, size);
+	struct cue_sheet *rv;
+
+	// Check for UTF-8 BOM, and skip ahead if found
+	if (size >= 3 && memcmp(buf, "\xEF\xBB\xBF", 3) == 0) {
+		rv = cue_parse(buf + 3, size - 3);
+	} else {
+		rv = cue_parse(buf, size);
+	}
+
 	munmap(buf, size);
 	return rv;
 }

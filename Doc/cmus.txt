@@ -519,6 +519,9 @@ quit [-i] (*q*, *:wq*)
 	@li -i
 	ask before exiting
 
+raise-vte
+	Raise the virtual terminal emulator window.  Works only in X session.
+
 rand
 	Randomizes (shuffles) the tracks in the library, playlist or queue view.
 
@@ -632,6 +635,9 @@ update-cache [-f]
 	-f
 		Update all files. Same as quit, rm -f $XDG_CONFIG_HOME/cmus/cache, start cmus.
 
+version
+	Print the version information.
+
 view <name or 1-7>
 	Switches active view.
 
@@ -697,10 +703,10 @@ win-bottom (*G*, *end*)
 win-down [NUM] (*j*, *down*)
 	Goto down NUM (default 1) rows in the current window.
 
-win-half-page-down
+win-half-page-down (*^D*)
 	Goto down half a page in the current window.
 
-win-half-page-up
+win-half-page-up (*^U*)
 	Goto up half a page in the current window.
 
 win-mv-after (*p*)
@@ -862,6 +868,9 @@ color_win_bg (default) [`Color`]
 
 color_win_cur (lightyellow) [`Color`]
 	Color of currently playing track.
+
+color_win_cur_attr (default) [`Attributes`]
+	Currently playing track attributes.
 
 color_win_cur_sel_bg (blue) [`Color`]
 	Background color of the selected row which is also the currently
