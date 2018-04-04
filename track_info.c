@@ -59,6 +59,7 @@ struct track_info *track_info_new(const char *filename)
 	ti->codec = NULL;
 	ti->codec_profile = NULL;
 	ti->encodedby = NULL;
+	ti->popularimeter = NULL;
 
 	return ti;
 }
@@ -80,6 +81,7 @@ void track_info_set_comments(struct track_info *ti, struct keyval *comments) {
 	ti->is_va_compilation = track_is_va_compilation(comments);
 	ti->media = keyvals_get_val(comments, "media");
 	ti->encodedby = keyvals_get_val(comments, "encodedby");
+	ti->popularimeter = keyvals_get_val(comments, "popularimeter");
 
 	int bpm = comments_get_int(comments, "bpm");
 	if (ti->bpm == 0 || ti->bpm == -1) {
@@ -293,6 +295,7 @@ static const struct {
 	{ "media",		SORT_MEDIA		},
 	{ "bpm",		SORT_BPM		},
 	{ "encodedby",		SORT_ENCODEDBY		},
+	{ "popularimeter",		SORT_POPULARIMETER	},
 	{ "-artist",		REV_SORT_ARTIST		},
 	{ "-album",		REV_SORT_ALBUM		},
 	{ "-title",		REV_SORT_TITLE		},
@@ -316,6 +319,7 @@ static const struct {
 	{ "-media",		REV_SORT_MEDIA		},
 	{ "-bpm",		REV_SORT_BPM		},
 	{ "-encodedby",		REV_SORT_ENCODEDBY		},
+	{ "-popularimeter",		REV_SORT_POPULARIMETER	},
 	{ NULL,                 SORT_INVALID            }
 };
 

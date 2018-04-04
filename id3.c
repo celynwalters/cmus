@@ -266,6 +266,7 @@ const char * const id3_key_names[NUM_ID3_KEYS] = {
 	"media",
 	"bpm",
 	"encodedby",
+	"popularimeter",
 };
 
 static int utf16_is_lsurrogate(uchar uch)
@@ -981,6 +982,40 @@ static void decode_ufid(struct id3tag *id3, const char *buf, int len)
 	add_v2(id3, ID3_MUSICBRAINZ_TRACKID, ufid);
 }
 
+static void decode_popm(struct id3tag *id3, const char *buf, int len)
+{
+	char *popm;
+	int popm_len = len - 4 - 1 - 1;
+
+	popm = xnew(char, popm_len);
+	memcpy(popm, buf, popm_len);
+	popm[popm_len] = '\0';
+
+	int *rating;
+	rating = xnew(int, 1);
+	memcpy(rating, buf + popm_len + 1, 1);
+	id3_debug("%s: %d\n", popm, *rating);
+
+	char *rating_str;
+	rating_str = xnew(char, 16);
+
+	if (*rating > 0 && *rating <= 64)
+		strncpy(rating_str, "★", 4);
+	else if (*rating >= 64 && *rating <= 128)
+		strncpy(rating_str, "★★", 7);
+	else if (*rating > 128 && *rating <= 196)
+		strncpy(rating_str, "★★★", 10);
+	else if (*rating > 196 && *rating < 255)
+		strncpy(rating_str, "★★★★", 13);
+	else if (*rating == 255)
+		strncpy(rating_str, "★★★★★", 16);
+	else
+		*rating_str = '\0';
+
+	id3_debug("rating: %s\n", rating_str);
+	add_v2(id3, ID3_POPULARIMETER, rating_str);
+
+}
 
 static void v2_add_frame(struct id3tag *id3, struct v2_frame_header *fh, const char *buf)
 {
@@ -993,6 +1028,9 @@ static void v2_add_frame(struct id3tag *id3, struct v2_frame_header *fh, const c
 		return;
 	} else if (!strncmp(fh->id, "UFID", 4)) {
 		decode_ufid(id3, buf, fh->size);
+		return;
+	} else if (!strncmp(fh->id, "POPM", 4)) {
+		decode_popm(id3, buf, fh->size);
 		return;
 	}
 

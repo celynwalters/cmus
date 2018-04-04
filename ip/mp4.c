@@ -488,6 +488,9 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 	if (tags->encodedBy) {
 		comments_add_const(&c, "encodedby", tags->encodedBy);
 	}
+	if (tags->popularimeter) {
+		comments_add_const(&c, "popularimeter", tags->popularimeter);
+	}
 
 	MP4TagsFree(tags);
 

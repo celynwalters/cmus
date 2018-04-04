@@ -307,6 +307,7 @@ enum {
 	TF_PLAYLISTMODE,
 	TF_BPM,
 	TF_ENCODEDBY,
+	TF_POPULARIMETER,
 
 	NR_TFS
 };
@@ -366,6 +367,7 @@ static struct format_option track_fopts[NR_TFS + 1] = {
 	DEF_FO_STR('\0', "playlist_mode", 0),
 	DEF_FO_INT('\0', "bpm", 0),
 	DEF_FO_STR('e', "encodedby", 0),
+	DEF_FO_STR('p', "popularimeter", 0),
 	DEF_FO_END
 };
 
@@ -628,6 +630,7 @@ static void fill_track_fopts_track_info(struct track_info *info)
 	}
 	fopt_set_int(&track_fopts[TF_BPM], info->bpm, info->bpm == -1);
 	fopt_set_str(&track_fopts[TF_ENCODEDBY], info->encodedby);
+	fopt_set_str(&track_fopts[TF_POPULARIMETER], info->popularimeter);
 }
 
 static int get_album_length(struct album *album)

@@ -1206,6 +1206,7 @@ Special Keys:
 	    %{subtitle}		@br
 	    %{media}		@br
 	    %{encodedby}		@br
+	    %{popularimeter}		@br
 	%=
 		start align right (use at most once)
 	%%
@@ -1411,7 +1412,7 @@ built-in filters. Also (and)-grouping is done implicitly.
 
 @li long
 *filename*, *artist*, *albumartist*, *album*, *title*, *genre*, *comment*,
-*codec*, *codec_profile*, *media*, *encodedby*
+*codec*, *codec_profile*, *media*, *encodedby*, *popularimeter*
 @br
 Comparators: *=* and *!=* (not equal)
 

@@ -188,7 +188,7 @@ static const char *interesting[] = {
 	"bpm",
 	"arranger", "composer", "conductor", "lyricist", "performer",
 	"remixer", "label", "publisher", "work", "opus", "partnumber", "part",
-	"subtitle", "media", "encodedby",
+	"subtitle", "media", "encodedby", "popularimeter",
 	NULL
 };
 

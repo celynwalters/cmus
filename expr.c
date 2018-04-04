@@ -417,6 +417,7 @@ static const struct {
 	{ 'c',	"comment"	},
 	{ 'd',	"duration"	},
 	{ 'e',	"encodedby"	},
+	{ 'p',	"popularimeter"	},
 	{ 'f',	"filename"	},
 	{ 'g',	"genre"		},
 	{ 'l',	"album"		},
@@ -450,6 +451,7 @@ static const struct {
 	{ "media",	EXPR_STR	},
 	{ "originaldate",EXPR_INT	},
 	{ "play_count", EXPR_INT	},
+	{ "popularimeter",	EXPR_STR	},
 	{ "stream",	EXPR_BOOL	},
 	{ "tag",	EXPR_BOOL	},
 	{ "title",	EXPR_STR	},
@@ -905,6 +907,8 @@ static const char *str_val(const char *key, struct track_info *ti, char **need_f
 		val = ti->codec_profile;
 	} else if (strcmp(key, "encodedby") == 0) {
 		val = ti->encodedby;
+	} else if (strcmp(key, "popularimeter") == 0) {
+		val = ti->popularimeter;
 	} else {
 		val = keyvals_get_val(ti->comments, key);
 	}
