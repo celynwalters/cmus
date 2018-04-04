@@ -999,13 +999,13 @@ static void decode_popm(struct id3tag *id3, const char *buf, int len)
 	char *rating_str;
 	rating_str = xnew(char, 16);
 
-	if (*rating > 0 && *rating <= 64)
+	if (*rating > 0 && *rating < 64)
 		strncpy(rating_str, "★", 4);
-	else if (*rating >= 64 && *rating <= 128)
+	else if (*rating >= 64 && *rating < 128)
 		strncpy(rating_str, "★★", 7);
-	else if (*rating > 128 && *rating <= 196)
+	else if (*rating >= 128 && *rating < 196)
 		strncpy(rating_str, "★★★", 10);
-	else if (*rating > 196 && *rating < 255)
+	else if (*rating >= 196 && *rating < 255)
 		strncpy(rating_str, "★★★★", 13);
 	else if (*rating == 255)
 		strncpy(rating_str, "★★★★★", 16);
