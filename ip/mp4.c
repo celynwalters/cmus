@@ -447,6 +447,8 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 #else /* !USE_MPEG4IP, new interface */
 
 	tags = MP4TagsAlloc();
+	const char code[] = {114, 97, 116, 101}; // "rate", no term char
+	MP4ItmfItemList *popTags = MP4ItmfGetItemsByCode(priv->mp4.handle, code);
 
 	MP4TagsFetch(tags, priv->mp4.handle);
 
@@ -488,8 +490,12 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 	if (tags->encodedBy) {
 		comments_add_const(&c, "encodedby", tags->encodedBy);
 	}
-	if (tags->popularimeter) {
-		comments_add_const(&c, "popularimeter", tags->popularimeter);
+	if (popTags->size) {
+		char *rating_str;
+		rating_str = xnew(char, 16);
+		int rating = atoi(popTags->elements[0].dataList.elements[0].value);
+		translate_popm(&rating, rating_str);
+		comments_add_const(&c, "popularimeter", rating_str);
 	}
 
 	MP4TagsFree(tags);

@@ -70,6 +70,8 @@ struct id3tag {
 
 extern const char * const id3_key_names[NUM_ID3_KEYS];
 
+void translate_popm(int *rating, char *rating_str);
+
 int id3_tag_size(const char *buf, int buf_size);
 
 void id3_init(struct id3tag *id3);
