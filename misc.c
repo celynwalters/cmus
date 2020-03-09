@@ -41,7 +41,6 @@ const char *cmus_socket_path = NULL;
 const char *cmus_data_dir = NULL;
 const char *cmus_lib_dir = NULL;
 const char *home_dir = NULL;
-const char *user_name = NULL;
 
 char **get_words(const char *text)
 {
@@ -220,13 +219,6 @@ int misc_init(void)
 	if (home_dir == NULL)
 		die("error: environment variable HOME not set\n");
 
-	user_name = get_non_empty_env("USER");
-	if (user_name == NULL) {
-		user_name = get_non_empty_env("USERNAME");
-		if (user_name == NULL)
-			die("error: neither USER or USERNAME environment variable set\n");
-	}
-
 	cmus_config_dir = get_non_empty_env("CMUS_HOME");
 	if (cmus_config_dir == NULL) {
 		char *cmus_home = xstrjoin(home_dir, "/.cmus");
@@ -252,7 +244,7 @@ int misc_init(void)
 	}
 	make_dir(cmus_config_dir);
 
-	cmus_playlist_dir = getenv("CMUS_PLAYLIST_DIR");
+	cmus_playlist_dir = get_non_empty_env("CMUS_PLAYLIST_DIR");
 	if (!cmus_playlist_dir)
 		cmus_playlist_dir = xstrjoin(cmus_config_dir, "/playlists");
 

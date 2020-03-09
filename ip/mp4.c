@@ -16,15 +16,15 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ip.h"
-#include "xmalloc.h"
-#include "debug.h"
-#include "id3.h"
-#include "file.h"
+#include "../ip.h"
+#include "../xmalloc.h"
+#include "../debug.h"
+#include "../id3.h"
+#include "../file.h"
 #ifdef HAVE_CONFIG
-#include "config/mp4.h"
+#include "../config/mp4.h"
 #endif
-#include "comment.h"
+#include "../comment.h"
 #include "aac.h"
 
 #if USE_MPEG4IP
@@ -496,6 +496,11 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 		int rating = atoi(popTags->elements[0].dataList.elements[0].value);
 		translate_popm(&rating, rating_str);
 		comments_add_const(&c, "popularimeter", rating_str);
+	}
+	if (tags->tempo) {
+		char buf[6];
+		snprintf(buf, 6, "%u", *tags->tempo);
+		comments_add_const(&c, "bpm", buf);
 	}
 
 	MP4TagsFree(tags);
